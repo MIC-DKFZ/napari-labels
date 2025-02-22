@@ -1,0 +1,30 @@
+name: napari-label-manager
+display_name: Label Manager
+# use 'hidden' to remove plugin from napari hub search results
+visibility: public
+# see https://napari.org/stable/plugins/technical_references/manifest.html#fields for valid categories
+categories: ["Annotation", "Segmentation", "Acquisition"]
+contributions:
+  commands:
+    - id: napari-label-manager.make_container_widget
+      python_name: napari_label_manager:ImageThreshold
+      title: Make threshold Container widget
+    - id: napari-label-manager.make_magic_widget
+      python_name: napari_label_manager:threshold_magic_widget
+      title: Make threshold magic widget
+    - id: napari-label-manager.make_function_widget
+      python_name: napari_label_manager:threshold_autogenerate_widget
+      title: Make threshold function widget
+    - id: napari-label-manager.make_qwidget
+      python_name: napari_label_manager:ExampleQWidget
+      title: Make example QWidget
+  widgets:
+    - command: napari-label-manager.make_container_widget
+      display_name: Container Threshold
+    - command: napari-label-manager.make_magic_widget
+      display_name: Magic Threshold
+    - command: napari-label-manager.make_function_widget
+      autogenerate: true
+      display_name: Autogenerate Threshold
+    - command: napari-label-manager.make_qwidget
+      display_name: Example QWidget
