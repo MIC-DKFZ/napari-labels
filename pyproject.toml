@@ -64,11 +64,11 @@ where = ["src"]
 version = {attr = "napari_label_manager.__init__.__version__"}
 
 [tool.black]
-line-length = 79
+line-length = 100
 target-version = ['py38', 'py39', 'py310']
 
 [tool.ruff]
-line-length = 79
+line-length = 100
 lint.select = [
     "E", "F", "W", #flake8
     "UP", # pyupgrade

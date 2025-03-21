@@ -7,7 +7,7 @@
 [![codecov](https://codecov.io/gh/lars.kraemer/napari-label-manager/branch/main/graph/badge.svg)](https://codecov.io/gh/lars.kraemer/napari-label-manager)
 [![napari hub](https://img.shields.io/endpoint?url=https://api.napari-hub.org/shields/napari-label-manager)](https://napari-hub.org/plugins/napari-label-manager)
 
-Mange Color Settings of Label Layers
+Manage Color Settings of Label Layers
 
 ----------------------------------
 
