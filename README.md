@@ -1,61 +1,44 @@
 # napari-label-manager
 
-[![License Apache Software License 2.0](https://img.shields.io/pypi/l/napari-label-manager.svg?color=green)](https://github.com/lars.kraemer/napari-label-manager/raw/main/LICENSE)
-[![PyPI](https://img.shields.io/pypi/v/napari-label-manager.svg?color=green)](https://pypi.org/project/napari-label-manager)
-[![Python Version](https://img.shields.io/pypi/pyversions/napari-label-manager.svg?color=green)](https://python.org)
-[![tests](https://github.com/lars.kraemer/napari-label-manager/workflows/tests/badge.svg)](https://github.com/lars.kraemer/napari-label-manager/actions)
-[![codecov](https://codecov.io/gh/lars.kraemer/napari-label-manager/branch/main/graph/badge.svg)](https://codecov.io/gh/lars.kraemer/napari-label-manager)
-[![napari hub](https://img.shields.io/endpoint?url=https://api.napari-hub.org/shields/napari-label-manager)](https://napari-hub.org/plugins/napari-label-manager)
+A plugin for flexible and intuitive color management of label layers in Napari, designed to enhance the visual clarity and control of your labeled data.
+Assign custom colors to individual classes using a color picker or RGB input, adjust per-class opacity, and apply colormaps to visually distinguish between labels with ease.
 
-Manage Color Settings of Label Layers
+## Seaborn Color palettes
 
-----------------------------------
+You can edit all color palette names which are valid for `seaborn.color_palette()`.
+An overview can be found here:
 
-This [napari] plugin was generated with [copier] using the [napari-plugin-template].
-
-<!--
-Don't miss the full getting started guide to set up your new package:
-https://github.com/napari/napari-plugin-template#getting-started
-
-and review the napari docs for plugin developers:
-https://napari.org/stable/plugins/index.html
--->
+- https://r02b.github.io/seaborn_palettes/
+- https://www.practicalpythonfordatascience.com/ap_seaborn_palette
 
 ## Installation
 
 You can install `napari-label-manager` via [pip]:
 
-    pip install napari-label-manager
-
-
-
-
-## Contributing
-
-Contributions are very welcome. Tests can be run with [tox], please ensure
-the coverage at least stays the same before you submit a pull request.
+```
+pip install napari-label-manager
+```
 
 ## License
 
 Distributed under the terms of the [Apache Software License 2.0] license,
 "napari-label-manager" is free and open source software
 
-## Issues
+## Acknowledgments
 
-If you encounter any problems, please [file an issue] along with a detailed description.
+<p align="left">
+  <img src="imgs/Logos/HI_Logo.png" width="150"> &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="imgs/Logos/DKFZ_Logo.png" width="500">
+</p>
 
-[napari]: https://github.com/napari/napari
+This repository is developed and maintained by the Applied Computer Vision Lab (ACVL)
+of [Helmholtz Imaging](https://www.helmholtz-imaging.de/) and the
+[Division of Medical Image Computing](https://www.dkfz.de/en/medical-image-computing) at DKFZ.
+
+This [napari] plugin was generated with [copier] using the [napari-plugin-template].
+
+[apache software license 2.0]: http://www.apache.org/licenses/LICENSE-2.0
 [copier]: https://copier.readthedocs.io/en/stable/
-[@napari]: https://github.com/napari
-[MIT]: http://opensource.org/licenses/MIT
-[BSD-3]: http://opensource.org/licenses/BSD-3-Clause
-[GNU GPL v3.0]: http://www.gnu.org/licenses/gpl-3.0.txt
-[GNU LGPL v3.0]: http://www.gnu.org/licenses/lgpl-3.0.txt
-[Apache Software License 2.0]: http://www.apache.org/licenses/LICENSE-2.0
-[Mozilla Public License 2.0]: https://www.mozilla.org/media/MPL/2.0/index.txt
-[napari-plugin-template]: https://github.com/napari/napari-plugin-template
-
 [napari]: https://github.com/napari/napari
-[tox]: https://tox.readthedocs.io/en/latest/
+[napari-plugin-template]: https://github.com/napari/napari-plugin-template
 [pip]: https://pypi.org/project/pip/
-[PyPI]: https://pypi.org/

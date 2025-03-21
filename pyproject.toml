@@ -26,9 +26,9 @@ classifiers = [
 requires-python = ">=3.9"
 dependencies = [
     "numpy",
-    "magicgui",
     "qtpy",
-    "scikit-image",
+    "napari_toolkit",
+    "seaborn",
 ]
 
 [project.optional-dependencies]
