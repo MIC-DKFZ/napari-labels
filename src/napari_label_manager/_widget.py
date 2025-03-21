@@ -190,7 +190,6 @@ class LabelManager(QWidget):
             layer.refresh()
 
     def update_picker(self):
-        print(" --- SET CM PICKER")
         self.disconnect_picker()
 
         for i, p in enumerate(self.colorpickers):
@@ -205,14 +204,12 @@ class LabelManager(QWidget):
         self.connect_picker()
 
     def get_cm_from_layer(self):
-        print("GET CM FROM LAYER")
         layer_name, _ = get_value(self.layerselect)
         if layer_name == "":
             return
         self.cmap = self._viewer.layers[layer_name].colormap
 
     def get_cm_from_picker(self):
-        print("GET CM FROM PICKER")
         colors = []
         for p in self.colorpickers:
             color = get_value(p)
