@@ -1,9 +1,12 @@
+import json
+from pathlib import Path
+
 import numpy as np
 import seaborn as sns
 from napari import Viewer
 from napari.layers import Labels
 from napari.utils.colormaps import CyclicLabelColormap, DirectLabelColormap, label_colormap
-from napari_toolkit.containers import setup_scrollarea, setup_vgroupbox
+from napari_toolkit.containers import setup_scrollarea, setup_vcollapsiblegroupbox, setup_vgroupbox
 from napari_toolkit.containers.boxlayout import hstack
 from napari_toolkit.utils import set_value
 from napari_toolkit.utils.widget_getter import get_value
@@ -21,6 +24,7 @@ from napari_toolkit.widgets import (
     setup_spinbox,
 )
 from qtpy.QtWidgets import (
+    QFileDialog,
     QSizePolicy,
     QVBoxLayout,
     QWidget,
@@ -106,7 +110,7 @@ class LabelManager(QWidget):
         _ = hstack(_layout, [label, self.all_layers])
 
         # --- 2. COLORMAP --- #
-        _container, _layout = setup_vgroupbox(main_layout, "Colormap:")
+        _container, _layout = setup_vcollapsiblegroupbox(main_layout, "Colormap:", True)
         self.combobox_cm = setup_combobox(
             None, self.colormap_options, placeholder="Select", function=self.on_cm_selected
         )
@@ -125,7 +129,7 @@ class LabelManager(QWidget):
         )  # ,function=self.on_cm_update)
 
         # --- 3. SETTINGS --- #
-        _container, _layout = setup_vgroupbox(main_layout, "Settings:")
+        _container, _layout = setup_vcollapsiblegroupbox(main_layout, "Settings:", True)
 
         # --- 3.1 Colormap Type --- #
         _tmp = setup_label(None, "CM Type:")
@@ -150,6 +154,12 @@ class LabelManager(QWidget):
         )
         self.label_opp_slider.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         _ = hstack(_layout, [label_opp, self.label_opp_slider])
+
+        # --- 1.4. IO --- #
+        _container, _layout = setup_vgroupbox(main_layout, "")
+        self.load_btn = setup_pushbutton(None, "Load", function=self.load)
+        self.save_btn = setup_pushbutton(None, "Save", function=self.save)
+        _ = hstack(_layout, [self.load_btn, self.save_btn])
 
         # --- 4. CLASS COLORS --- #
         self.scroll_area = setup_scrollarea(main_layout)
@@ -387,3 +397,68 @@ class LabelManager(QWidget):
         for i, p in enumerate(self.colorpickers):
             if i != 0:
                 p.changed.disconnect(self.on_picker_changed)
+
+    # IO
+    def save(self):
+
+        _dialog = QFileDialog(self)
+        _dialog.setDirectory(str(Path.cwd()))
+        config_path, _ = _dialog.getSaveFileName(
+            self, "Select File", filter="*.col", options=QFileDialog.DontUseNativeDialog
+        )
+        if config_path is not None and config_path.endswith(".col"):
+            config_path = Path(config_path)
+            # config_path = Path("config.col")
+            numc = get_value(self.spinbox_numc)
+            if isinstance(self.cmap, CyclicLabelColormap):
+                colors = self.cmap.colors[1:]
+                cm_type = "CyclicLabelColormap"
+            elif isinstance(self.cmap, DirectLabelColormap):
+                color_dict = {
+                    k: v for k, v in self.cmap.color_dict.items() if isinstance(k, int) and k > 0
+                }
+                color_dict = dict(sorted(color_dict.items()))
+                colors = list(color_dict.values())
+                cm_type = "DirectLabelColormap"
+
+            colors = np.array(colors).tolist()
+
+            config = {"cm_type": cm_type, "numc": numc, "colors": colors}
+
+            with Path(config_path).open("w") as f:
+                json.dump(config, f, indent=4)
+        else:
+            print("No Valid File Selected")
+
+    def load(self):
+        _dialog = QFileDialog(self)
+        _dialog.setDirectory(str(Path.cwd()))
+        config_path, _ = _dialog.getOpenFileName(
+            self, "Select File", filter="*.col", options=QFileDialog.DontUseNativeDialog
+        )
+        if config_path is not None and config_path.endswith(".col"):
+            with Path(config_path).open("r") as f:
+                config = json.load(f)
+
+            numc = config["numc"]
+            set_value(self.spinbox_numc, numc)
+
+            if config["cm_type"] == "CyclicLabelColormap":
+                self.cmap = CyclicLabelColormap(
+                    colors=np.array([[0, 0, 0, 0]] + config["colors"]),
+                )
+
+            elif config["cm_type"] == "DirectLabelColormap":
+                color_dict = dict(enumerate(config["colors"]))
+                color_dict[None] = [0, 0, 0, 0]
+                color_dict[0] = [0, 0, 0, 0]
+
+                self.cmap = DirectLabelColormap(color_dict=color_dict)
+
+            set_value(self.cyclic, isinstance(self.cmap, CyclicLabelColormap))
+            set_value(self.direct, isinstance(self.cmap, DirectLabelColormap))
+
+            self.update_layercm()
+            self.update_picker()
+        else:
+            print("No Valid File Selected")
