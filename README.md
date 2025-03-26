@@ -27,8 +27,8 @@ Distributed under the terms of the [Apache Software License 2.0] license,
 ## Acknowledgments
 
 <p align="left">
-  <img src="imgs/Logos/HI_Logo.png" width="150"> &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="imgs/Logos/DKFZ_Logo.png" width="500">
+  <img src="https://github.com/MIC-DKFZ/napari-labels/raw/main/imgs/Logos/HI_Logo.png" width="150"> &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/MIC-DKFZ/napari-labels/raw/main/imgs/Logos/DKFZ_Logo.png" width="500">
 </p>
 
 This repository is developed and maintained by the Applied Computer Vision Lab (ACVL)

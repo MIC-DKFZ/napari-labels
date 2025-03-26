@@ -59,6 +59,9 @@ where = ["src"]
 [tool.setuptools.package-data]
 "*" = ["*.yaml"]
 
+[project.urls]
+Homepage = "https://github.com/MIC-DKFZ/napari-nninteractive"
+Code = "https://github.com/MIC-DKFZ/napari-nninteractive"
 
 [tool.setuptools.dynamic]
 version = {attr = "napari_labels.__init__.__version__"}
