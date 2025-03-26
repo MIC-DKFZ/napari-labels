@@ -36,6 +36,7 @@ class LabelsControlWidget(QWidget):
     def __init__(self, viewer: Viewer):
         super().__init__()
         self._viewer = viewer
+        self.file_ending = ".nclr"
         self.colormap_options = [
             "default",
             "random",
@@ -404,9 +405,13 @@ class LabelsControlWidget(QWidget):
         _dialog = QFileDialog(self)
         _dialog.setDirectory(str(Path.cwd()))
         config_path, _ = _dialog.getSaveFileName(
-            self, "Select File", filter="*.col", options=QFileDialog.DontUseNativeDialog
+            self,
+            "Select File",
+            f"color_map{self.file_ending}",
+            filter=f"*{self.file_ending}",
+            options=QFileDialog.DontUseNativeDialog,
         )
-        if config_path is not None and config_path.endswith(".col"):
+        if config_path is not None and config_path.endswith(self.file_ending):
             config_path = Path(config_path)
             # config_path = Path("config.col")
             numc = get_value(self.spinbox_numc)
@@ -434,9 +439,12 @@ class LabelsControlWidget(QWidget):
         _dialog = QFileDialog(self)
         _dialog.setDirectory(str(Path.cwd()))
         config_path, _ = _dialog.getOpenFileName(
-            self, "Select File", filter="*.col", options=QFileDialog.DontUseNativeDialog
+            self,
+            "Select File",
+            filter=f"*{self.file_ending}",
+            options=QFileDialog.DontUseNativeDialog,
         )
-        if config_path is not None and config_path.endswith(".col"):
+        if config_path is not None and config_path.endswith(self.file_ending):
             with Path(config_path).open("r") as f:
                 config = json.load(f)
 

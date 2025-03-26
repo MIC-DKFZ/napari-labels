@@ -7,7 +7,7 @@ categories: ["Utilities"]
 contributions:
   commands:
     - id: napari-labels.LabelsControlWidget
-      python_name: napari_labelsr:LabelsControlWidget
+      python_name: napari_labels:LabelsControlWidget
       title: Labels Control
   widgets:
     - command: napari-labels.LabelsControlWidget
