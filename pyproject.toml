@@ -1,7 +1,7 @@
 [project]
-name = "napari-label-manager"
+name = "napari-labels"
 dynamic = ["version"]
-description = "Mange Color Settings of Label Layers"
+description = "Adding intuitive label color management, allowing custom class colors, per-class opacity, and colormap control to enhance visual clarity."
 readme = "README.md"
 license = {file = "LICENSE"}
 authors = [
@@ -42,7 +42,7 @@ testing = [
 ]
 
 [project.entry-points."napari.manifest"]
-napari-label-manager = "napari_label_manager:napari.yaml"
+napari-labels = "napari_labels:napari.yaml"
 
 
 
@@ -61,7 +61,7 @@ where = ["src"]
 
 
 [tool.setuptools.dynamic]
-version = {attr = "napari_label_manager.__init__.__version__"}
+version = {attr = "napari_labels.__init__.__version__"}
 
 [tool.black]
 line-length = 100

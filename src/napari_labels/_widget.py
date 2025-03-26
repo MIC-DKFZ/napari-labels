@@ -31,7 +31,7 @@ from qtpy.QtWidgets import (
 )
 
 
-class LabelManager(QWidget):
+class LabelsControlWidget(QWidget):
 
     def __init__(self, viewer: Viewer):
         super().__init__()
