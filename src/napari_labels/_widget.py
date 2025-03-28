@@ -77,7 +77,7 @@ class LabelsControlWidget(QWidget):
             self.cmap = layer.colormap
             layer.events.colormap.connect(self.on_layer_changed)
         else:
-            self.build_cmap("default", get_value(self.spinbox_numc))
+            self.build_cm("default", get_value(self.spinbox_numc))
 
         self.connect_picker()
         self.update_picker()
